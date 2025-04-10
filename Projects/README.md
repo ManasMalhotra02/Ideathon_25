@@ -20,4 +20,36 @@ SYNAPSE-X is a visionary Neural-AI Fusion System that digitally uploads human co
 Ideathon Winner | 2025  
 [Full Project Details in PPT]
 
+## 👥 Team Vajra Storm – The Minds Behind SYNAPSE-X
+ 
+_"We Disrupt like Thunder, Build like Vajra!"_
 
+### ⚡ Core Team Members:
+
+- 💡 **Riya Gupta** – Team Leader, Core Idea Creator & Pitch Strategist  
+  📩 guptariya1092@gmail.com
+
+- 📊 **Atul Verma** – Business Development & Market Analyst  
+  📩 atulverma9728@gmail.com
+
+- 🧠 **Tanisha Jain** – Innovation & Research Lead  
+  📩 tanishajain274@gmail.com
+
+- 🛡️ **Saksham Juneja** – Support & Review Analyst  
+  📩 saksham.juneja007@gmail.com
+
+---
+
+### 🌌 A Final Note
+
+SYNAPSE-X is currently a **concept-stage innovation**, born from a deep desire to preserve the human spirit beyond biological limits.  
+
+It’s an idea that dares to imagine a world where death isn't the end — but a new beginning in digital form.
+
+We believe in the power of dreams, technology and human emotion — and this is just the beginning.
+
+With vision, passion and the spark of Team Vajra Storm ⚡  
+_"Because memories deserve immortality."_
+
+**For more depth and development roadmap, refer to our full ppt.**  
+Crafted with vision by **Team Vajra Storm** ⚡
