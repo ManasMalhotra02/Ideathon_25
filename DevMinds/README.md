@@ -25,7 +25,7 @@ Our aim is to reduce waste, feed the hungry, and promote sustainable practices i
 - **AI/NLP**: OpenAI for matching logic (Optional: Freshness check)
 - **Hosting**: Render / Firebase Hosting / AWS
 
-## Team: Eco-Guardians
+## Team: DevMinds
 
 ## Roles of team members in project :
 
