@@ -1,4 +1,4 @@
-# Project Title: AI Chatbot for College Assistant
+# Project Title : AI Chatbot for College Assistant
 
 ## Problem Statement
 New students often face confusion and lack proper guidance during their initial days of college. They have multiple questions related to academics, schedules, faculty contacts, campus facilities, and more—but no immediate support available round the clock.
