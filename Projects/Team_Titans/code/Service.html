@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Services | Complete Healthcare Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Design System */
+        :root {
+            /* Medical Color Palette */
+            --primary: #3a86ff;
+            --primary-light: #e0f2fe;
+            --primary-dark: #1e40af;
+            --secondary: #4895ef;
+            --accent: #4cc9f0;
+            --success: #06d6a0;
+            --warning: #ffbe0b;
+            --danger: #ef233c;
+            
+            /* Specialty Category Colors */
+            --primary-care: #4895ef;
+            --surgical: #f72585;
+            --medical: #7209b7;
+            --diagnostic: #4cc9f0;
+            --wellness: #06d6a0;
+            --emergency: #ef233c;
+            
+            --text-dark: #1a1a2e;
+            --text-medium: #4a4e69;
+            --text-light: #f8f9fa;
+            --background: #f8f9ff;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            
+            /* Typography */
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            
+            /* Effects */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.2);
+            
+            /* Animation */
+            --transition-fast: 0.15s;
+            --transition-normal: 0.3s;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--background);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: var(--space-md);
+        }
+
+        /* Layout Components */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: var(--space-md);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal) ease;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Typography Components */
+        .heading-1 {
+            font-size: var(--text-3xl);
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: var(--space-sm);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .heading-1:hover {
+            text-decoration: underline;
+        }
+
+        .heading-2 {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-xs);
+            position: relative;
+        }
+
+        /* Color-coded section headings */
+        .primary-care-heading {
+            color: var(--primary-care);
+        }
+        .surgical-heading {
+            color: var(--surgical);
+        }
+        .medical-heading {
+            color: var(--medical);
+        }
+        .diagnostic-heading {
+            color: var(--diagnostic);
+        }
+        .wellness-heading {
+            color: var(--wellness);
+        }
+        .emergency-heading {
+            color: var(--emergency);
+        }
+
+        .heading-2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        .primary-care-heading::after {
+            background: var(--primary-care);
+        }
+        .surgical-heading::after {
+            background: var(--surgical);
+        }
+        .medical-heading::after {
+            background: var(--medical);
+        }
+        .diagnostic-heading::after {
+            background: var(--diagnostic);
+        }
+        .wellness-heading::after {
+            background: var(--wellness);
+        }
+        .emergency-heading::after {
+            background: var(--emergency);
+        }
+
+        .text-lead {
+            font-size: var(--text-lg);
+            color: var(--text-medium);
+            margin-bottom: var(--space-md);
+        }
+
+        /* Search Component */
+        .search {
+            margin-bottom: var(--space-xl);
+            display: flex;
+            justify-content: center;
+        }
+
+        .search__input-container {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search__input {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md) var(--space-sm) 3rem;
+            border: 2px solid var(--primary-light);
+            border-radius: 30px;
+            font-size: var(--text-base);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal) ease;
+            background-color: white;
+        }
+
+        .search__input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
+        }
+
+        .search__icon {
+            position: absolute;
+            left: var(--space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+
+        /* Service Card Component */
+        .service-card {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal) ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            transition: all var(--transition-normal) ease;
+        }
+
+        /* Color-coded cards based on category */
+        .primary-care-card::before {
+            background: var(--primary-care);
+        }
+        .surgical-card::before {
+            background: var(--surgical);
+        }
+        .medical-card::before {
+            background: var(--medical);
+        }
+        .diagnostic-card::before {
+            background: var(--diagnostic);
+        }
+        .wellness-card::before {
+            background: var(--wellness);
+        }
+        .emergency-card::before {
+            background: var(--emergency);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-card:hover::before {
+            width: 8px;
+        }
+
+        .service-card__icon {
+            font-size: var(--space-xl);
+            margin-bottom: var(--space-sm);
+            transition: all var(--transition-normal) ease;
+        }
+
+        /* Color-coded icons */
+        .primary-care-card .service-card__icon {
+            color: var(--primary-care);
+        }
+        .surgical-card .service-card__icon {
+            color: var(--surgical);
+        }
+        .medical-card .service-card__icon {
+            color: var(--medical);
+        }
+        .diagnostic-card .service-card__icon {
+            color: var(--diagnostic);
+        }
+        .wellness-card .service-card__icon {
+            color: var(--wellness);
+        }
+        .emergency-card .service-card__icon {
+            color: var(--emergency);
+        }
+
+        .service-card:hover .service-card__icon {
+            transform: scale(1.1);
+        }
+
+        .service-card__title {
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            transition: all var(--transition-normal) ease;
+        }
+
+        .service-card:hover .service-card__title {
+            color: var(--primary-dark);
+        }
+
+        .service-card__description {
+            font-size: var(--text-base);
+            color: var(--text-medium);
+            margin-bottom: var(--space-sm);
+            flex-grow: 1;
+        }
+
+        .service-card__action {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            transition: all var(--transition-normal) ease;
+        }
+
+        /* Color-coded action links */
+        .primary-care-card .service-card__action {
+            color: var(--primary-care);
+        }
+        .surgical-card .service-card__action {
+            color: var(--surgical);
+        }
+        .medical-card .service-card__action {
+            color: var(--medical);
+        }
+        .diagnostic-card .service-card__action {
+            color: var(--diagnostic);
+        }
+        .wellness-card .service-card__action {
+            color: var(--wellness);
+        }
+        .emergency-card .service-card__action {
+            color: var(--emergency);
+        }
+
+        .service-card:hover .service-card__action {
+            transform: translateX(5px);
+        }
+
+        /* Highlight Card for Emergency Services */
+        .emergency-highlight {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--emergency), #d90429);
+            color: white;
+        }
+
+        .emergency-highlight .service-card__title,
+        .emergency-highlight .service-card__description,
+        .emergency-highlight .service-card__action {
+            color: white;
+        }
+
+        .emergency-highlight .service-card__icon {
+            color: white;
+            font-size: var(--space-xl);
+        }
+
+        /* Responsive Grid */
+        @media (min-width: 640px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .emergency-highlight {
+                grid-column: span 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .emergency-highlight {
+                grid-column: span 2;
+            }
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--primary-light);
+            padding: var(--space-xl);
+            border-radius: 10px;
+            margin-top: var(--space-xl);
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: var(--space-md);
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: var(--space-sm);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            margin-bottom: var(--space-md);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding-left: var(--space-sm);
+            color: var(--text-medium);
+            display: none;
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background-color: var(--emergency);
+            color: white;
+            padding: var(--space-sm);
+            text-align: center;
+            margin-bottom: var(--space-md);
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        /* Appointment Button */
+        .appointment-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition-normal) ease;
+            margin-top: var(--space-md);
+            box-shadow: var(--shadow-md);
+        }
+
+        .appointment-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="section">
+            <a href="/" class="heading-1">Complete Healthcare Solutions</a>
+            <p class="text-lead">Comprehensive medical services for all your healthcare needs</p>
+            
+            <a href="/appointment" class="appointment-btn">
+                <i class="fas fa-calendar-check"></i> Book an Appointment
+            </a>
+        </header>
+
+        <!-- Emergency Banner -->
+        <div class="emergency-banner">
+            <i class="fas fa-ambulance"></i> For medical emergencies, please call 911 or visit your nearest emergency room
+        </div>
+
+        <!-- Search Component -->
+        <div class="search">
+            <div class="search__input-container">
+                <i class="fas fa-search search__icon"></i>
+                <input type="text" id="serviceSearch" class="search__input" placeholder="Search for doctors, specialties, or services...">
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Emergency Services Section -->
+            <section class="section">
+                <h2 class="heading-2 emergency-heading">Emergency & Urgent Care</h2>
+                <div class="grid services-grid" id="emergencyGrid">
+                    <!-- Cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Primary Care Section -->
+            <section class="section">
+                <h2 class="heading-2 primary-care-heading">Primary Care Services</h2>
+                <div class="grid services-grid" id="primaryCareGrid">
+                    <!-- Cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Surgical Services Section -->
+            <section class="section">
+                <h2 class="heading-2 surgical-heading">Surgical Specialties</h2>
+                <div class="grid services-grid" id="surgicalGrid">
+                    <!-- Cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Medical Specialties Section -->
+            <section class="section">
+                <h2 class="heading-2 medical-heading">Medical Specialties</h2>
+                <div class="grid services-grid" id="medicalGrid">
+                    <!-- Cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Diagnostic Services Section -->
+            <section class="section">
+                <h2 class="heading-2 diagnostic-heading">Diagnostic Services</h2>
+                <div class="grid services-grid" id="diagnosticGrid">
+                    <!-- Cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Wellness Services Section -->
+            <section class="section">
+                <h2 class="heading-2 wellness-heading">Wellness & Prevention</h2>
+                <div class="grid services-grid" id="wellnessGrid">
+                    <!-- Cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section class="testimonials">
+                <h2 class="heading-2">Patient Testimonials</h2>
+                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md);">
+                    <div class="testimonial-card">
+                        <p class="testimonial-content">"The care I received from Dr. Smith was exceptional. She took the time to listen and explain everything clearly."</p>
+                        <p class="testimonial-author">- Sarah Johnson, Cardiology Patient</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-content">"The entire staff made my surgery experience as comfortable as possible. Highly recommend this facility."</p>
+                        <p class="testimonial-author">- Michael Chen, Orthopedic Patient</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-content">"From check-in to follow-up, every aspect of my care was professional and compassionate."</p>
+                        <p class="testimonial-author">- David Wilson, Primary Care Patient</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="section">
+                <h2 class="heading-2">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">How do I schedule an appointment? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">You can schedule appointments online through our patient portal, by calling our office during business hours, or by using the "Book an Appointment" button above.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">What insurance plans do you accept? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">We accept most major insurance plans including Medicare. Please contact our billing office for specific plan information.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Do you offer telehealth services? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Yes, we offer virtual visits for many types of appointments. Check with your provider to see if your needs can be met via telehealth.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Data Layer - Medical Service Information
+        const medicalServices = {
+            emergency: [
+                {
+                    id: 'emergency-care',
+                    name: 'Emergency Care',
+                    description: '24/7 emergency services for life-threatening conditions and injuries',
+                    icon: 'ambulance',
+                    category: 'emergency',
+                    url: 'services/emergency-care',
+                    highlight: true
+                },
+                {
+                    id: 'urgent-care',
+                    name: 'Urgent Care',
+                    description: 'Immediate care for non-life-threatening illnesses and injuries',
+                    icon: 'first-aid',
+                    category: 'emergency',
+                    url: 'services/urgent-care'
+                }
+            ],
+            primaryCare: [
+                {
+                    id: 'family-medicine',
+                    name: 'Family Medicine',
+                    description: 'Comprehensive care for patients of all ages',
+                    icon: 'user-md',
+                    category: 'primary-care',
+                    url: 'services/family-medicine'
+                },
+                {
+                    id: 'pediatrics',
+                    name: 'Pediatrics',
+                    description: 'Specialized care for infants, children, and adolescents',
+                    icon: 'baby',
+                    category: 'primary-care',
+                    url: 'services/pediatrics'
+                },
+                {
+                    id: 'geriatrics',
+                    name: 'Geriatric Care',
+                    description: 'Specialized care for elderly patients',
+                    icon: 'wheelchair',
+                    category: 'primary-care',
+                    url: 'services/geriatrics'
+                }
+            ],
+            surgical: [
+                {
+                    id: 'general-surgery',
+                    name: 'General Surgery',
+                    description: 'Common surgical procedures and operations',
+                    icon: 'procedures',
+                    category: 'surgical',
+                    url: 'services/general-surgery'
+                },
+                {
+                    id: 'orthopedic',
+                    name: 'Orthopedic Surgery',
+                    description: 'Bones, joints, and musculoskeletal system',
+                    icon: 'bone',
+                    category: 'surgical',
+                    url: 'services/orthopedic-surgery'
+                },
+                {
+                    id: 'cardiac-surgery',
+                    name: 'Cardiac Surgery',
+                    description: 'Heart and cardiovascular system surgeries',
+                    icon: 'heartbeat',
+                    category: 'surgical',
+                    url: 'services/cardiac-surgery'
+                }
+            ],
+            medical: [
+                {
+                    id: 'cardiology',
+                    name: 'Cardiology',
+                    description: 'Heart and cardiovascular system care',
+                    icon: 'heart',
+                    category: 'medical',
+                    url: 'services/cardiology'
+                },
+                {
+                    id: 'neurology',
+                    name: 'Neurology',
+                    description: 'Nervous system and brain disorders',
+                    icon: 'brain',
+                    category: 'medical',
+                    url: 'services/neurology'
+                },
+                {
+                    id: 'endocrinology',
+                    name: 'Endocrinology',
+                    description: 'Hormones and metabolic disorders',
+                    icon: 'vial',
+                    category: 'medical',
+                    url: 'services/endocrinology'
+                }
+            ],
+            diagnostic: [
+                {
+                    id: 'imaging',
+                    name: 'Medical Imaging',
+                    description: 'X-rays, CT scans, MRIs, and ultrasounds',
+                    icon: 'x-ray',
+                    category: 'diagnostic',
+                    url: 'services/imaging'
+                },
+                {
+                    id: 'lab-tests',
+                    name: 'Laboratory Tests',
+                    description: 'Blood work, urinalysis, and pathology',
+                    icon: 'microscope',
+                    category: 'diagnostic',
+                    url: 'services/lab-tests'
+                },
+                {
+                    id: 'ekg',
+                    name: 'EKG/ECG Testing',
+                    description: 'Heart rhythm and electrical activity tests',
+                    icon: 'heartbeat',
+                    category: 'diagnostic',
+                    url: 'services/ekg'
+                }
+            ],
+            wellness: [
+                {
+                    id: 'preventive-care',
+                    name: 'Preventive Care',
+                    description: 'Annual checkups, screenings, and vaccinations',
+                    icon: 'shield-virus',
+                    category: 'wellness',
+                    url: 'services/preventive-care'
+                },
+                {
+                    id: 'nutrition',
+                    name: 'Nutrition Counseling',
+                    description: 'Dietary planning and nutritional guidance',
+                    icon: 'apple-alt',
+                    category: 'wellness',
+                    url: 'services/nutrition'
+                },
+                {
+                    id: 'mental-health',
+                    name: 'Mental Health Services',
+                    description: 'Counseling and psychiatric care',
+                    icon: 'brain',
+                    category: 'wellness',
+                    url: 'services/mental-health'
+                }
+            ]
+        };
+
+        // DOM Elements
+        const searchInput = document.getElementById('serviceSearch');
+        const emergencyGrid = document.getElementById('emergencyGrid');
+        const primaryCareGrid = document.getElementById('primaryCareGrid');
+        const surgicalGrid = document.getElementById('surgicalGrid');
+        const medicalGrid = document.getElementById('medicalGrid');
+        const diagnosticGrid = document.getElementById('diagnosticGrid');
+        const wellnessGrid = document.getElementById('wellnessGrid');
+
+        // View Layer - Render Service Cards
+        function renderServiceCards(serviceArray, container) {
+            container.innerHTML = serviceArray.map(service => `
+                <a href="${service.url}" class="card service-card ${service.category}-card ${service.highlight ? 'emergency-highlight' : ''}" 
+                   data-id="${service.id}" data-name="${service.name.toLowerCase()}">
+                    <div class="service-card__icon">
+                        <i class="fas fa-${service.icon}"></i>
+                    </div>
+                    <h3 class="service-card__title">${service.name}</h3>
+                    <p class="service-card__description">${service.description}</p>
+                    <div class="service-card__action">
+                        <span>${service.category === 'emergency' ? 'Get help now' : 'Learn more'}</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // Controller - Initialize Page
+        function initPage() {
+            // Render all service cards
+            renderServiceCards(medicalServices.emergency, emergencyGrid);
+            renderServiceCards(medicalServices.primaryCare, primaryCareGrid);
+            renderServiceCards(medicalServices.surgical, surgicalGrid);
+            renderServiceCards(medicalServices.medical, medicalGrid);
+            renderServiceCards(medicalServices.diagnostic, diagnosticGrid);
+            renderServiceCards(medicalServices.wellness, wellnessGrid);
+
+            // Add search functionality
+            searchInput.addEventListener('input', filterServices);
+
+            // Add FAQ toggle functionality
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('i');
+                    
+                    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
+        }
+
+        // Search Functionality
+        function filterServices() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            document.querySelectorAll('.service-card').forEach(card => {
+                const serviceName = card.dataset.name;
+                if (serviceName.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>
