@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthHub | Intelligent Medical Portal</title>
+    <meta name="description" content="AI-powered healthcare management platform">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Design System */
+            --primary-50: #eef2ff;
+            --primary-100: #e0e7ff;
+            --primary-200: #c7d2fe;
+            --primary-300: #a5b4fc;
+            --primary-400: #818cf8;
+            --primary-500: #6366f1;
+            --primary-600: #4f46e5;
+            --primary-700: #4338ca;
+            --primary-800: #3730a3;
+            --primary-900: #312e81;
+            
+            --secondary-400: #f472b6;
+            --secondary-500: #ec4899;
+            --secondary-600: #db2777;
+            
+            --accent-400: #60a5fa;
+            --accent-500: #3b82f6;
+            --accent-600: #2563eb;
+            
+            --success-400: #34d399;
+            --success-500: #10b981;
+            --success-600: #059669;
+            
+            --warning-400: #fbbf24;
+            --warning-500: #f59e0b;
+            --warning-600: #d97706;
+            
+            --error-400: #f87171;
+            --error-500: #ef4444;
+            --error-600: #dc2626;
+            
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-full: 9999px;
+            
+            --transition-fast: 75ms;
+            --transition-normal: 150ms;
+            --transition-slow: 300ms;
+            
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
+            
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+            background-color: var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex-col {
+            flex-direction: column;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .gap-xs { gap: var(--space-xs); }
+        .gap-sm { gap: var(--space-sm); }
+        .gap-md { gap: var(--space-md); }
+        .gap-lg { gap: var(--space-lg); }
+        .gap-xl { gap: var(--space-xl); }
+        
+        .text-center { text-align: center; }
+        .text-primary { color: var(--primary-600); }
+        .text-secondary { color: var(--secondary-600); }
+        .text-accent { color: var(--accent-600); }
+        
+        .bg-primary { background-color: var(--primary-600); }
+        .bg-secondary { background-color: var(--secondary-600); }
+        .bg-accent { background-color: var(--accent-600); }
+        
+        .p-sm { padding: var(--space-sm); }
+        .p-md { padding: var(--space-md); }
+        .p-lg { padding: var(--space-lg); }
+        .p-xl { padding: var(--space-xl); }
+        
+        .py-sm { padding-top: var(--space-sm); padding-bottom: var(--space-sm); }
+        .py-md { padding-top: var(--space-md); padding-bottom: var(--space-md); }
+        .py-lg { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
+        .py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+        
+        .shadow-sm { box-shadow: var(--shadow-sm); }
+        .shadow-md { box-shadow: var(--shadow-md); }
+        .shadow-lg { box-shadow: var(--shadow-lg); }
+        
+        .rounded-md { border-radius: var(--radius-md); }
+        .rounded-lg { border-radius: var(--radius-lg); }
+        .rounded-xl { border-radius: var(--radius-xl); }
+        
+        /* Component Styles */
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: white;
+            box-shadow: var(--shadow-sm);
+            padding: var(--space-sm) 0;
+        }
+        
+        .navbar__content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-600), var(--secondary-600));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .logo__icon {
+            font-size: var(--text-2xl);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: var(--space-md);
+            list-style: none;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-normal);
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-600);
+            background-color: var(--primary-50);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-600);
+            font-weight: 600;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 2px;
+            background-color: var(--primary-600);
+            border-radius: var(--radius-full);
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: var(--space-2xl) 0;
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+            color: white;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .hero__content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero__title {
+            font-size: var(--text-4xl);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            line-height: 1.2;
+        }
+        
+        .hero__subtitle {
+            font-size: var(--text-xl);
+            opacity: 0.9;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            font-weight: 600;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            border: none;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn--primary {
+            background-color: white;
+            color: var(--primary-600);
+        }
+        
+        .btn--primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+        
+        .btn--secondary {
+            background-color: var(--secondary-600);
+            color: white;
+        }
+        
+        .btn--secondary:hover {
+            background-color: var(--secondary-500);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: var(--space-2xl) 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .section-title {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .section-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray-600);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+            border-top: 4px solid var(--primary-500);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feature-card--secondary {
+            border-top-color: var(--secondary-500);
+        }
+        
+        .feature-card--accent {
+            border-top-color: var(--accent-500);
+        }
+        
+        .feature-icon {
+            font-size: var(--text-3xl);
+            margin-bottom: var(--space-md);
+            color: var(--primary-500);
+        }
+        
+        .feature-card--secondary .feature-icon {
+            color: var(--secondary-500);
+        }
+        
+        .feature-card--accent .feature-icon {
+            color: var(--accent-500);
+        }
+        
+        .feature-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--gray-900);
+        }
+        
+        .feature-card--secondary .feature-title {
+            color: var(--secondary-600);
+        }
+        
+        .feature-card--accent .feature-title {
+            color: var(--accent-600);
+        }
+        
+        .feature-description {
+            color: var(--gray-600);
+            margin-bottom: var(--space-md);
+        }
+        
+        .feature-link {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--primary-600);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        .feature-link:hover {
+            color: var(--primary-700);
+        }
+        
+        .feature-card--secondary .feature-link {
+            color: var(--secondary-600);
+        }
+        
+        .feature-card--secondary .feature-link:hover {
+            color: var(--secondary-700);
+        }
+        
+        .feature-card--accent .feature-link {
+            color: var(--accent-600);
+        }
+        
+        .feature-card--accent .feature-link:hover {
+            color: var(--accent-700);
+        }
+        
+        /* Stats Section */
+        .stats {
+            background-color: var(--primary-600);
+            color: white;
+            padding: var(--space-xl) 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-xl);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: var(--text-4xl);
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .stat-label {
+            font-size: var(--text-lg);
+            opacity: 0.9;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: var(--space-2xl) 0;
+            background-color: var(--gray-50);
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+        
+        .testimonial-quote {
+            font-size: var(--text-lg);
+            font-style: italic;
+            color: var(--gray-700);
+            margin-bottom: var(--space-md);
+            position: relative;
+        }
+        
+        .testimonial-quote::before {
+            content: '"';
+            font-size: var(--text-4xl);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            color: var(--primary-100);
+            z-index: 0;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-full);
+            object-fit: cover;
+        }
+        
+        .testimonial-author-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .testimonial-author-name {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+        
+        .testimonial-author-title {
+            color: var(--gray-500);
+            font-size: var(--text-sm);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: var(--space-2xl) 0;
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta__content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta__title {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+        
+        .cta__description {
+            font-size: var(--text-lg);
+            opacity: 0.9;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--gray-800);
+            color: white;
+            padding: var(--space-xl) 0;
+            margin-top: auto;
+        }
+        
+        .footer__content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer__logo {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .footer__description {
+            color: var(--gray-400);
+            margin-bottom: var(--space-md);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--space-md);
+        }
+        
+        .social-link {
+            color: var(--gray-400);
+            font-size: var(--text-xl);
+            transition: color var(--transition-fast);
+        }
+        
+        .social-link:hover {
+            color: white;
+        }
+        
+        .footer__heading {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: white;
+        }
+        
+        .footer__links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .footer__link {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        .footer__link:hover {
+            color: white;
+        }
+        
+        .footer__bottom {
+            border-top: 1px solid var(--gray-700);
+            padding-top: var(--space-md);
+            text-align: center;
+            color: var(--gray-400);
+            font-size: var(--text-sm);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar__content {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .nav-link {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .hero__title {
+                font-size: var(--text-3xl);
+            }
+            
+            .hero__subtitle {
+                font-size: var(--text-lg);
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container navbar__content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat logo__icon"></i>
+                <span>HealthHub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="register.html" class="nav-link">Register</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero animate-fade-in">
+        <div class="container hero__content">
+            <h1 class="hero__title">Your Personalized Healthcare Platform</h1>
+            <p class="hero__subtitle">AI-powered tools to manage your health, connect with providers, and access medical records securely</p>
+            <div class="flex gap-md justify-center">
+                <a href="register.html" class="btn btn--primary">
+                    <i class="fas fa-user-plus"></i> Get Started
+                </a>
+                <a href="#features" class="btn btn--secondary">
+                    <i class="fas fa-search"></i> Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header animate-fade-in delay-100">
+                <h2 class="section-title">Comprehensive Healthcare Solutions</h2>
+                <p class="section-subtitle">Everything you need to manage your health in one secure platform</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-fade-in delay-200">
+                    <i class="fas fa-calendar-check feature-icon"></i>
+                    <h3 class="feature-title">Smart Appointments</h3>
+                    <p class="feature-description">AI-powered scheduling finds the best times for your appointments based on your preferences and provider availability.</p>
+                    <a href="#" class="feature-link">
+                        Learn more <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="feature-card feature-card--secondary animate-fade-in delay-300">
+                    <i class="fas fa-lock feature-icon"></i>
+                    <h3 class="feature-title">Secure Health Records</h3>
+                    <p class="feature-description">Blockchain-encrypted storage for all your medical data with granular permission controls.</p>
+                    <a href="#" class="feature-link">
+                        Learn more <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="feature-card feature-card--accent animate-fade-in delay-400">
+                    <i class="fas fa-comments feature-icon"></i>
+                    <h3 class="feature-title">Virtual Consultations</h3>
+                    <p class="feature-description">Secure video calls with healthcare providers from the comfort of your home.</p>
+                    <a href="#" class="feature-link">
+                        Learn more <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">Patients Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1,200+</div>
+                    <div class="stat-label">Healthcare Providers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime Reliability</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Users Say</h2>
+                <p class="section-subtitle">Trusted by patients and healthcare professionals worldwide</p>
+            </div>
+            <div class="features-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">HealthHub has transformed how I manage my chronic condition. Having all my records in one place with secure access for my doctors has improved my care dramatically.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson" class="testimonial-avatar">
+                        <div class="testimonial-author-info">
+                            <span class="testimonial-author-name">Sarah Johnson</span>
+                            <span class="testimonial-author-title">Patient since 2022</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">As a physician, I appreciate how HealthHub streamlines communication with my patients and gives me secure access to their complete medical history.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. Michael Chen" class="testimonial-avatar">
+                        <div class="testimonial-author-info">
+                            <span class="testimonial-author-name">Dr. Michael Chen</span>
+                            <span class="testimonial-author-title">Cardiologist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container cta__content">
+            <h2 class="cta__title">Ready to take control of your healthcare?</h2>
+            <p class="cta__description">Join thousands of patients and providers who trust HealthHub for their medical needs.</p>
+            <div class="btn-group">
+                <a href="register.html" class="btn btn--primary">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </a>
+                <a href="#" class="btn btn--secondary">
+                    <i class="fas fa-video"></i> Demo Video
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div>
+                    <div class="footer__logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>HealthHub</span>
+                    </div>
+                    <p class="footer__description">The most trusted healthcare platform for patients and providers.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer__heading">For Patients</h3>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Find a Doctor</a></li>
+                        <li><a href="#" class="footer__link">Book Appointments</a></li>
+                        <li><a href="#" class="footer__link">Access Records</a></li>
+                        <li><a href="#" class="footer__link">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer__heading">For Providers</h3>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Join Our Network</a></li>
+                        <li><a href="#" class="footer__link">Provider Portal</a></li>
+                        <li><a href="#" class="footer__link">Resources</a></li>
+                        <li><a href="#" class="footer__link">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer__heading">Company</h3>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">About Us</a></li>
+                        <li><a href="#" class="footer__link">Careers</a></li>
+                        <li><a href="#" class="footer__link">Press</a></li>
+                        <li><a href="#" class="footer__link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 HealthHub Medical Technologies. All rights reserved. | <a href="#" class="footer__link">Privacy Policy</a> | <a href="#" class="footer__link">Terms of Service</a> | <a href="#" class="footer__link">HIPAA Compliance</a></p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Enhanced JavaScript with modular structure
+        document.addEventListener('DOMContentLoaded', function() {
+            // Application State
+            const state = {
+                currentPage: window.location.pathname.split('/').pop(),
+                scrollPosition: window.scrollY,
+                lastScrollPosition: 0,
+                scrollingDown: false
+            };
+            // DOM Elements
+            const elements = {
+                navbar: document.querySelector('.navbar'),
+                navLinks: document.querySelectorAll('.nav-link'),
+                featureCards: document.querySelectorAll('.feature-card'),
+                animatedElements: document.querySelectorAll('.animate-fade-in')
+            };
+            
+            // Utility Functions
+            const utils = {
+                debounce: function(func, wait) {
+                    let timeout;
+                    return function() {
+                        const context = this, args = arguments;
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => func.apply(context, args), wait);
+                    };
+                },
+                
+                throttle: function(func, limit) {
+                    let lastFunc;
+                    let lastRan;
+                    return function() {
+                        const context = this;
+                        const args = arguments;
+                        if (!lastRan) {
+                            func.apply(context, args);
+                            lastRan = Date.now();
+                        } else {
+                            clearTimeout(lastFunc);
+                            lastFunc = setTimeout(function() {
+                                if ((Date.now() - lastRan) >= limit) {
+                                    func.apply(context, args);
+                                    lastRan = Date.now();
+                                }
+                            }, limit - (Date.now() - lastRan));
+                        }
+                    };
+                },
+                
+                isInViewport: function(element) {
+                    const rect = element.getBoundingClientRect();
+                    return (
+                        rect.top >= 0 &&
+                        rect.left >= 0 &&
+                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                    );
+                },
+                
+                scrollTo: function(element) {
+                    window.scrollTo({
+                        behavior: 'smooth',
+                        top: element.offsetTop - 100
+                    });
+                }
+            };
+            
+            // Navigation Functions
+            const navigation = {
+                setActiveLink: function() {
+                    elements.navLinks.forEach(link => {
+                        if (link.getAttribute('href') === state.currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                },
+                
+                handleNavScroll: function() {
+                    state.scrollPosition = window.scrollY;
+                    
+                    if (state.scrollPosition > 100) {
+                        elements.navbar.classList.add('shadow-md');
+                    } else {
+                        elements.navbar.classList.remove('shadow-md');
+                    }
+                    
+                    // Hide/show navbar on scroll
+                    if (state.scrollPosition > state.lastScrollPosition && state.scrollPosition > 100) {
+                        // Scrolling down
+                        elements.navbar.style.transform = 'translateY(-100%)';
+                        state.scrollingDown = true;
+                    } else {
+                        // Scrolling up
+                        elements.navbar.style.transform = 'translateY(0)';
+                        state.scrollingDown = false;
+                    }
+                    
+                    state.lastScrollPosition = state.scrollPosition;
+                },
+                
+                initSmoothScroll: function() {
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                        anchor.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const target = document.querySelector(this.getAttribute('href'));
+                            if (target) {
+                                utils.scrollTo(target);
+                            }
+                        });
+                    });
+                }
+            };
+            
+            // Animation Functions
+            const animations = {
+                animateOnScroll: function() {
+                    elements.animatedElements.forEach(element => {
+                        if (utils.isInViewport(element)) {
+                            element.style.animationPlayState = 'running';
+                        }
+                    });
+                },
+                
+                initIntersectionObserver: function() {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('animate-fade-in--visible');
+                            }
+                        });
+                    }, {
+                        threshold: 0.1
+                    });
+                    
+                    document.querySelectorAll('.animate-fade-in').forEach(element => {
+                        observer.observe(element);
+                    });
+                }
+            };
+            
+            // Event Listeners
+            const setupEventListeners = function() {
+                window.addEventListener('scroll', utils.throttle(navigation.handleNavScroll, 100));
+                window.addEventListener('scroll', utils.debounce(animations.animateOnScroll, 50));
+                window.addEventListener('resize', utils.debounce(animations.animateOnScroll, 100));
+                
+                // Initialize animations when page loads
+                window.addEventListener('load', animations.animateOnScroll);
+            };
+            
+            // Initialize Application
+            const init = function() {
+                navigation.setActiveLink();
+                navigation.initSmoothScroll();
+                animations.initIntersectionObserver();
+                setupEventListeners();
+                
+                // Initial check for elements in viewport
+                animations.animateOnScroll();
+            };
+            
+            init();
+        });
+    </script>
+</body>
+</html>

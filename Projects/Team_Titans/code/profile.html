@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Profile | Medical Records</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Patient-Friendly Color Palette */
+            --primary: #4a89dc;
+            --primary-light: #e8f2fc;
+            --primary-dark: #2a5da7;
+            --accent: #5d9cec;
+            --success: #48cfad;
+            --warning: #ffce54;
+            --error: #ed5565;
+            --text-dark: #2c3e50;
+            --text-medium: #7f8c8d;
+            --text-light: #f8f9fa;
+            --background: #f5f7fa;
+            --card-bg: #ffffff;
+            --border-color: #e0e6ed;
+            
+            /* Dark Mode Variables */
+            --dark-bg: #1a1a2e;
+            --dark-card: #16213e;
+            --dark-text: #e6e6e6;
+            --dark-border: #2d4059;
+            
+            /* Effects */
+            --depth-1: 0 1px 2px rgba(0,0,0,0.05);
+            --depth-2: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --depth-3: 0 10px 15px -3px rgba(0,0,0,0.1);
+            
+            /* Animation */
+            --transition-fast: 0.15s;
+            --transition-normal: 0.3s;
+            --transition-slow: 0.5s;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--background);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            transition: all var(--transition-slow) ease;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Medical-themed background elements */
+        .medical-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .medical-shape {
+            position: absolute;
+            opacity: 0.05;
+        }
+
+        .shape-1 {
+            top: 10%;
+            left: 5%;
+            font-size: 15rem;
+            color: var(--primary);
+            animation: float 20s infinite linear;
+        }
+
+        .shape-2 {
+            bottom: 15%;
+            right: 10%;
+            font-size: 10rem;
+            color: var(--primary);
+            animation: float 25s infinite linear reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(5deg); }
+            50% { transform: translate(100px, 0) rotate(0deg); }
+            75% { transform: translate(50px, -50px) rotate(-5deg); }
+        }
+
+        /* Main Profile Card */
+        .profile-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--depth-2);
+            width: 100%;
+            max-width: 900px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Profile Header */
+        .profile-header {
+            display: flex;
+            padding: 2.5rem;
+            background: var(--primary-light);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .profile-pic-container {
+            position: relative;
+            margin-right: 2rem;
+            flex-shrink: 0;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: var(--depth-1);
+        }
+
+        .profile-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .profile-title {
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin: 0.5rem 0;
+            font-weight: 600;
+        }
+
+        .profile-status {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(74, 137, 220, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .stat-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+        }
+
+        /* Interactive Tabs */
+        .tab-container {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--primary-light);
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            position: relative;
+            font-weight: 500;
+            color: var(--text-medium);
+            transition: all var(--transition-normal) ease;
+        }
+
+        .tab:hover {
+            color: var(--primary-dark);
+        }
+
+        .tab.active {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 2rem 2.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* About Section */
+        .about-text {
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: var(--text-medium);
+        }
+
+        h3 {
+            color: var(--text-dark);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        /* Medical History */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 7px;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-location {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+
+        /* Medications Section */
+        .medications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .medication-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--depth-1);
+            transition: all var(--transition-normal) ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .medication-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--depth-2);
+            border-color: var(--primary);
+        }
+
+        .medication-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .medication-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .medication-description {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+
+        /* Contact Section */
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--depth-1);
+            transition: all var(--transition-normal) ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--depth-2);
+            border-color: var(--primary);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+
+        /* Emergency Button */
+        .emergency-btn {
+            display: inline-block;
+            background: var(--error);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition-normal) ease;
+            margin-top: 1.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .emergency-btn:hover {
+            background: #d33f3f;
+            transform: translateY(-2px);
+            box-shadow: var(--depth-2);
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all var(--transition-normal) ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .profile-pic-container {
+                margin: 0 auto 1.5rem;
+            }
+
+            .profile-stats {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .tab-container {
+                overflow-x: auto;
+                white-space: nowrap;
+                scrollbar-width: none;
+            }
+
+            .tab-container::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab {
+                padding: 1rem;
+            }
+
+            .tab-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        body.dark-mode .profile-container,
+        body.dark-mode .medication-card,
+        body.dark-mode .contact-card {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .profile-header,
+        body.dark-mode .tab-container {
+            background: rgba(74, 137, 220, 0.1);
+            border-bottom-color: var(--dark-border);
+        }
+
+        body.dark-mode .tab {
+            color: var(--dark-text);
+        }
+
+        body.dark-mode .tab.active {
+            color: var(--primary);
+        }
+
+        body.dark-mode .about-text,
+        body.dark-mode .timeline-description,
+        body.dark-mode .medication-description,
+        body.dark-mode .contact-value,
+        body.dark-mode .stat-label {
+            color: rgba(226, 232, 240, 0.8);
+        }
+
+        body.dark-mode .timeline::before {
+            background: var(--dark-border);
+        }
+
+        body.dark-mode .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--dark-border);
+        }
+    </style>
+</head>
+<body>
+    <!-- Medical-themed background elements -->
+    <div class="medical-elements">
+        <div class="medical-shape shape-1">
+            <i class="fas fa-heartbeat"></i>
+        </div>
+        <div class="medical-shape shape-2">
+            <i class="fas fa-stethoscope"></i>
+        </div>
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Main Profile Card -->
+    <div class="profile-container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-pic-container">
+                <img src="https://i.imgur.com/6W3G5yK.jpg" alt="Patient Profile" class="profile-pic">
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name">Kakashi Hatake</h1>
+                <p class="profile-title">Patient ID: PT-789456</p>
+                <span class="profile-status">Active Patient</span>
+                
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <div>
+                            <div class="stat-value">32</div>
+                            <div class="stat-label">Age</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-venus-mars"></i>
+                        </div>
+                        <div>
+                            <div class="stat-value">Male</div>
+                            <div class="stat-label">Gender</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div>
+                            <div class="stat-value">A+</div>
+                            <div class="stat-label">Blood Type</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Tabs -->
+        <div class="tab-container">
+            <div class="tab active" data-tab="about">Overview</div>
+            <div class="tab" data-tab="history">Medical History</div>
+            <div class="tab" data-tab="medications">Medications</div>
+            <div class="tab" data-tab="contact">Contact</div>
+        </div>
+
+        <!-- Tab Contents -->
+        <div class="tab-content active" id="about">
+            <p class="about-text">
+                Kakashi Hatake is an active patient with regular check-ups and a history of excellent health. 
+                He maintains an active lifestyle and follows recommended health guidelines.
+            </p>
+            
+            <h3>Health Summary</h3>
+            <p class="about-text">
+                <strong>Last Checkup:</strong> 2 weeks ago<br>
+                <strong>Next Appointment:</strong> Scheduled for June 15, 2023<br>
+                <strong>Primary Physician:</strong> Dr. Tsunade Senju<br>
+                <strong>Insurance Provider:</strong> Konoha Health Plan
+            </p>
+            
+            <h3>Vital Statistics</h3>
+            <p class="about-text">
+                <strong>Height:</strong> 181 cm<br>
+                <strong>Weight:</strong> 67.5 kg<br>
+                <strong>BMI:</strong> 20.6 (Normal)<br>
+                <strong>Blood Pressure:</strong> 118/76 mmHg (Normal)<br>
+                <strong>Resting Heart Rate:</strong> 62 bpm (Excellent)
+            </p>
+            
+            <button class="emergency-btn">Emergency Contact</button>
+        </div>
+
+        <div class="tab-content" id="history">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">March 2023</div>
+                    <h4 class="timeline-title">Annual Physical Examination</h4>
+                    <div class="timeline-location">Konoha Medical Center</div>
+                    <p class="timeline-description">
+                        Complete physical with blood work. All results within normal ranges. Doctor recommended continuing current exercise regimen.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">October 2022</div>
+                    <h4 class="timeline-title">Minor Injury Treatment</h4>
+                    <div class="timeline-location">Emergency Room</div>
+                    <p class="timeline-description">
+                        Treated for minor lacerations and bruising from training accident. No fractures detected. Prescribed topical antibiotics.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">June 2021</div>
+                    <h4 class="timeline-title">Vision Correction Surgery</h4>
+                    <div class="timeline-location">Konoha Eye Institute</div>
+                    <p class="timeline-description">
+                        Successful LASIK procedure to correct nearsightedness. Full recovery achieved within expected timeframe.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="medications">
+            <div class="medications-grid">
+                <div class="medication-card">
+                    <div class="medication-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h4 class="medication-title">Ibuprofen</h4>
+                    <p class="medication-description">
+                        <strong>Dosage:</strong> 200mg as needed<br>
+                        <strong>For:</strong> Minor pain relief<br>
+                        <strong>Last Refill:</strong> 3 months ago
+                    </p>
+                </div>
+                <div class="medication-card">
+                    <div class="medication-icon">
+                        <i class="fas fa-eye-dropper"></i>
+                    </div>
+                    <h4 class="medication-title">Artificial Tears</h4>
+                    <p class="medication-description">
+                        <strong>Dosage:</strong> 1-2 drops as needed<br>
+                        <strong>For:</strong> Dry eye relief<br>
+                        <strong>Last Refill:</strong> 1 month ago
+                    </p>
+                </div>
+                <div class="medication-card">
+                    <div class="medication-icon">
+                        <i class="fas fa-capsules"></i>
+                    </div>
+                    <h4 class="medication-title">Multivitamin</h4>
+                    <p class="medication-description">
+                        <strong>Dosage:</strong> 1 daily<br>
+                        <strong>For:</strong> General health<br>
+                        <strong>Last Refill:</strong> 2 weeks ago
+                    </p>
+                </div>
+                <div class="medication-card">
+                    <div class="medication-icon">
+                        <i class="fas fa-allergies"></i>
+                    </div>
+                    <h4 class="medication-title">Antihistamine</h4>
+                    <p class="medication-description">
+                        <strong>Dosage:</strong> 10mg as needed<br>
+                        <strong>For:</strong> Seasonal allergies<br>
+                        <strong>Last Refill:</strong> 6 months ago
+                    </p>
+                </div>
+            </div>
+            
+            <button class="emergency-btn">Request Prescription Refill</button>
+        </div>
+
+        <div class="tab-content" id="contact">
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-label">Primary Phone</div>
+                    <div class="contact-value">+81 90-1234-5678</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">kakashi.h@konoha.jp</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-label">Address</div>
+                    <div class="contact-value">123 Hidden Leaf Village, Konoha</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="contact-label">Emergency Contact</div>
+                    <div class="contact-value">Guy Sensei<br>+81 90-9876-5432</div>
+                </div>
+            </div>
+            
+            <button class="emergency-btn">Update Contact Information</button>
+        </div>
+    </div>
+
+    <script>
+        // Tab Functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+        
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.body.classList.add('dark-mode');
+            themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            // Change icon and save preference
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Emergency button functionality
+        const emergencyBtns = document.querySelectorAll('.emergency-btn');
+        emergencyBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Emergency contact would be initiated here. This is a demo.');
+            });
+        });
+
+        // Animate elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.tab-content, .profile-header, .tab-container').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
