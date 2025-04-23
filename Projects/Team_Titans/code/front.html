@@ -1,0 +1,2126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeCare - Advanced Healthcare Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <style>
+        :root {
+            /* Enhanced Color Palette */
+            --primary: #2563eb;
+            --primary-light: #93c5fd;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --white: #ffffff;
+            
+            /* Extended Spacing */
+            --space-xxs: 0.25rem;
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            
+            /* Typography Scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
+            --text-6xl: 3.75rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-2xl: 24px;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: 100ms;
+            --transition-normal: 250ms;
+            --transition-slow: 400ms;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--white);
+            box-shadow: 0 4px 6px rgba(124, 58, 237, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #6d28d9;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 6px rgba(236, 72, 153, 0.2);
+        }
+        
+        .btn-accent:hover {
+            background-color: #db2777;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .section {
+            padding: var(--space-2xl) 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: var(--text-4xl);
+            margin-bottom: var(--space-md);
+            text-align: center;
+            position: relative;
+            color: var(--dark);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: var(--space-md) auto;
+            border-radius: var(--radius-full);
+        }
+        
+        .section-subtitle {
+            font-size: var(--text-xl);
+            color: var(--gray);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto var(--space-xl);
+            font-weight: 400;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: var(--space-sm) 0;
+            backdrop-filter: blur(8px);
+            transition: all var(--transition-normal);
+        }
+        
+        .navbar.scrolled {
+            padding: var(--space-xs) 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+            transition: transform var(--transition-fast);
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: var(--text-xl);
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: var(--space-sm);
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width var(--transition-fast);
+        }
+        
+        .nav-link:hover:after {
+            width: 60%;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .nav-link.active:after {
+            width: 60%;
+        }
+        
+        .btn-appointment {
+            background-color: var(--accent);
+            color: white;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .btn-appointment:hover {
+            background-color: #db2777;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: var(--text-xl);
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: var(--space-2xl) 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
+            opacity: 0.1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: var(--space-xl) 0;
+        }
+        
+        .hero h1 {
+            font-size: var(--text-5xl);
+            margin-bottom: var(--space-md);
+            line-height: 1.2;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .hero h1 span {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero h1 span:after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: rgba(236, 72, 153, 0.3);
+            z-index: -1;
+            border-radius: var(--radius-full);
+        }
+        
+        .hero p {
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-xl);
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .hero .btn {
+            padding: var(--space-md) var(--space-xl);
+            font-size: var(--text-lg);
+            border-radius: var(--radius-xl);
+            min-width: 180px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            min-width: 150px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero-stat-number {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .hero-stat-label {
+            font-size: var(--text-sm);
+            opacity: 0.9;
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--secondary), transparent);
+            opacity: 0.05;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+            border-top: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .feature-card:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.03), rgba(124, 58, 237, 0.03));
+            z-index: -1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-card--secondary {
+            border-top-color: var(--secondary);
+        }
+        
+        .feature-card--accent {
+            border-top-color: var(--accent);
+        }
+        
+        .feature-icon {
+            font-size: var(--text-3xl);
+            margin-bottom: var(--space-md);
+            color: var(--primary);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-light);
+            border-radius: var(--radius-lg);
+        }
+        
+        .feature-card--secondary .feature-icon {
+            color: var(--secondary);
+            background-color: rgba(124, 58, 237, 0.1);
+        }
+        
+        .feature-card--accent .feature-icon {
+            color: var(--accent);
+            background-color: rgba(236, 72, 153, 0.1);
+        }
+        
+        .feature-title {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--dark);
+        }
+        
+        .feature-card--secondary .feature-title {
+            color: var(--secondary);
+        }
+        
+        .feature-card--accent .feature-title {
+            color: var(--accent);
+        }
+        
+        .feature-description {
+            color: var(--gray);
+            margin-bottom: var(--space-md);
+        }
+        
+        .feature-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        
+        .feature-link:hover {
+            color: var(--primary-dark);
+            gap: var(--space-sm);
+        }
+        
+        .feature-card--secondary .feature-link {
+            color: var(--secondary);
+        }
+        
+        .feature-card--secondary .feature-link:hover {
+            color: #6d28d9;
+        }
+        
+        .feature-card--accent .feature-link {
+            color: var(--accent);
+        }
+        
+        .feature-card--accent .feature-link:hover {
+            color: #db2777;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: #f8fafc;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--primary), transparent);
+            opacity: 0.05;
+        }
+        
+        .service-tabs {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+            flex-wrap: wrap;
+        }
+        
+        .service-tab {
+            padding: var(--space-sm) var(--space-lg);
+            background-color: var(--white);
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 1px solid var(--primary-light);
+        }
+        
+        .service-tab:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+        
+        .service-tab.active {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        .service-content {
+            display: none;
+        }
+        
+        .service-content.active {
+            display: block;
+            animation: fadeIn var(--transition-slow) ease-out;
+        }
+        
+        .service-slider {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .swiper {
+            width: 100%;
+            padding: var(--space-md) 0;
+        }
+        
+        .swiper-slide {
+            background-color: var(--white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+            height: auto;
+            transition: all var(--transition-normal);
+        }
+        
+        .swiper-slide:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .service-icon {
+            font-size: var(--text-3xl);
+            color: var(--primary);
+            margin-bottom: var(--space-md);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-light);
+            border-radius: var(--radius-lg);
+        }
+        
+        .service-title {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--dark);
+        }
+        
+        .service-description {
+            color: var(--gray);
+            margin-bottom: var(--space-md);
+        }
+        
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-light);
+            opacity: 1;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background-color: var(--primary);
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            color: var(--white);
+            text-align: center;
+            position: relative;
+        }
+        
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
+            opacity: 0.05;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-xl);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-item {
+            padding: var(--space-md);
+        }
+        
+        .stat-number {
+            font-size: var(--text-4xl);
+            font-weight: 800;
+            margin-bottom: var(--space-xs);
+            background: linear-gradient(to right, var(--white), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .stat-label {
+            font-size: var(--text-lg);
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--white);
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background-color: var(--white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            margin: 0 var(--space-md);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            font-size: var(--text-6xl);
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--primary-light);
+            opacity: 0.3;
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-content {
+            margin-bottom: var(--space-md);
+            font-style: italic;
+            color: var(--gray);
+            position: relative;
+            z-index: 1;
+            font-size: var(--text-lg);
+            line-height: 1.7;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-light);
+        }
+        
+        .testimonial-info h4 {
+            font-size: var(--text-lg);
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .testimonial-info p {
+            font-size: var(--text-sm);
+            color: var(--gray);
+        }
+        
+        .testimonial-rating {
+            color: var(--warning);
+            margin-top: var(--space-xs);
+        }
+        
+        /* Doctors Section */
+        .doctors {
+            background-color: #f8fafc;
+        }
+        
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+        }
+        
+        .doctor-card {
+            background-color: var(--white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+        
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .doctor-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .doctor-info {
+            padding: var(--space-lg);
+        }
+        
+        .doctor-name {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            color: var(--dark);
+        }
+        
+        .doctor-specialty {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            display: block;
+        }
+        
+        .doctor-bio {
+            color: var(--gray);
+            margin-bottom: var(--space-md);
+            font-size: var(--text-sm);
+        }
+        
+        .doctor-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--space-md);
+        }
+        
+        .doctor-experience {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--gray);
+            font-size: var(--text-sm);
+        }
+        
+        /* Appointment CTA */
+        .appointment-cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+            padding: var(--space-2xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .appointment-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
+            opacity: 0.1;
+        }
+        
+        .appointment-cta .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .appointment-cta h2 {
+            font-size: var(--text-4xl);
+            margin-bottom: var(--space-md);
+            font-weight: 800;
+        }
+        
+        .appointment-cta p {
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-xl);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--white);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            background-color: #f8fafc;
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-normal);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .contact-icon {
+            font-size: var(--text-xl);
+            color: var(--primary);
+            background-color: var(--primary-light);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+        }
+        
+        .contact-details h3 {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-xs);
+            color: var(--dark);
+        }
+        
+        .contact-details p, .contact-details a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        .contact-details a:hover {
+            color: var(--primary);
+        }
+        
+        .contact-form {
+            background-color: #f8fafc;
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: var(--space-sm);
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            font-size: var(--text-base);
+            transition: all var(--transition-fast);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: var(--space-2xl) 0 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer-about {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        
+        .footer-logo {
+            font-size: var(--text-xl);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .footer-logo i {
+            color: var(--accent);
+        }
+        
+        .footer-about p {
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--space-md);
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all var(--transition-fast);
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-heading {
+            font-size: var(--text-lg);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            color: var(--white);
+            position: relative;
+            padding-bottom: var(--space-xs);
+        }
+        
+        .footer-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: var(--radius-full);
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .footer-link:hover {
+            color: var(--primary);
+            padding-left: var(--space-xs);
+        }
+        
+        .footer-link i {
+            font-size: var(--text-xs);
+        }
+        
+        .footer-newsletter p {
+            color: #94a3b8;
+            margin-bottom: var(--space-md);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: var(--space-sm);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+        }
+        
+        .newsletter-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 0 var(--space-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .newsletter-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding: var(--space-md) 0;
+            text-align: center;
+            color: #94a3b8;
+            font-size: var(--text-sm);
+        }
+        
+        .footer-bottom a {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        .footer-bottom a:hover {
+            color: var(--primary);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: var(--space-md);
+            right: var(--space-md);
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-lg);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+            z-index: 999;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .animate {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .section {
+                padding: var(--space-xl) 0;
+            }
+            
+            .section-title {
+                font-size: var(--text-3xl);
+            }
+            
+            .hero h1 {
+                font-size: var(--text-4xl);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: var(--space-md);
+                gap: var(--space-sm);
+                box-shadow: var(--shadow-md);
+                transform: translateY(-150%);
+                transition: transform var(--transition-normal);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: var(--space-sm);
+            }
+            
+            .hero h1 {
+                font-size: var(--text-3xl);
+            }
+            
+            .hero p {
+                font-size: var(--text-lg);
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: var(--text-2xl);
+            }
+            
+            .section-subtitle {
+                font-size: var(--text-base);
+            }
+            
+            .hero h1 {
+                font-size: var(--text-2xl);
+            }
+            
+            .hero p {
+                font-size: var(--text-base);
+            }
+            
+            .hero-stat {
+                min-width: 120px;
+                padding: var(--space-sm);
+            }
+            
+            .hero-stat-number {
+                font-size: var(--text-xl);
+            }
+            
+            .hero-stat-label {
+                font-size: var(--text-xs);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="logo">
+                <img src="img2.jpeg" alt="MeCare Logo" class="logo-img">
+                <span class="logo-text">MeCare</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="front.html" class="nav-link active">Home</a></li>
+                <li><a href="profile.html" class="nav-link">Profile</a></li>
+                <li><a href="Service.html" class="nav-link">Services</a></li>
+                <li><a href="#doctors" class="nav-link">Doctors</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="register.html" class="nav-link">Register</a></li>
+                <li><a href="Appo.html" class="btn-appointment">
+                    <i class="fas fa-calendar-check"></i> Appointment
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content animate">
+            <h1>Advanced Healthcare <span>Solutions</span> For Everyone</h1>
+            <p>MeCare combines cutting-edge technology with compassionate care to deliver exceptional healthcare experiences tailored to your needs.</p>
+            <div class="hero-btns">
+                <a href="register.html" class="btn btn-primary pulse">
+                    <i class="fas fa-user-plus"></i> Get Started
+                </a>
+                <a href="#services" class="btn btn-outline">
+                    <i class="fas fa-search"></i> Explore Services
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat animate delay-1">
+                    <div class="hero-stat-number">15K+</div>
+                    <div class="hero-stat-label">Patients Treated</div>
+                </div>
+                <div class="hero-stat animate delay-2">
+                    <div class="hero-stat-number">200+</div>
+                    <div class="hero-stat-label">Expert Doctors</div>
+                </div>
+                <div class="hero-stat animate delay-3">
+                    <div class="hero-stat-number">24/7</div>
+                    <div class="hero-stat-label">Emergency Care</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features" id="features">
+        <div class="container">
+            <h2 class="section-title animate">Why Choose MeCare</h2>
+            <p class="section-subtitle animate delay-1">We're redefining healthcare with innovative solutions and patient-centered care</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card animate delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3 class="feature-title">Expert Specialists</h3>
+                    <p class="feature-description">Our board-certified physicians provide exceptional care across all major medical specialties with the latest treatments.</p>
+                    <a href="#doctors" class="feature-link">
+                        Meet our doctors <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card feature-card--secondary animate delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-medical"></i>
+                    </div>
+                    <h3 class="feature-title">Digital Health Platform</h3>
+                    <p class="feature-description">Access your health records, schedule appointments, and consult doctors through our secure online portal.</p>
+                    <a href="profile.html" class="feature-link">
+                        Learn more <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card feature-card--accent animate delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="feature-title">Preventive Care</h3>
+                    <p class="feature-description">Comprehensive wellness programs designed to detect health issues early and keep you at your best.</p>
+                    <a href="Service.html" class="feature-link">
+                        Explore programs <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <h2 class="section-title animate">Our Medical Services</h2>
+            <p class="section-subtitle animate delay-1">Comprehensive healthcare solutions for every stage of life</p>
+            
+            <div class="service-tabs">
+                <div class="service-tab active" data-tab="general">General Care</div>
+                <div class="service-tab" data-tab="specialty">Specialty Care</div>
+                <div class="service-tab" data-tab="diagnostic">Diagnostics</div>
+                <div class="service-tab" data-tab="wellness">Wellness</div>
+            </div>
+            
+            <div class="service-content active" id="general">
+                <div class="service-slider">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-stethoscope"></i>
+                                </div>
+                                <h3 class="service-title">Primary Care</h3>
+                                <p class="service-description">Comprehensive primary care services for patients of all ages, focusing on prevention and overall wellness.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-baby"></i>
+                                </div>
+                                <h3 class="service-title">Pediatrics</h3>
+                                <p class="service-description">Specialized care for infants, children, and adolescents with child-friendly facilities.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-notes-medical"></i>
+                                </div>
+                                <h3 class="service-title">Chronic Disease Management</h3>
+                                <p class="service-description">Personalized care plans for diabetes, hypertension, and other chronic conditions.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-syringe"></i>
+                                </div>
+                                <h3 class="service-title">Vaccinations</h3>
+                                <p class="service-description">Complete immunization services for children and adults, including travel vaccines.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-content" id="specialty">
+                <div class="service-slider">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <h3 class="service-title">Cardiology</h3>
+                                <p class="service-description">Advanced heart care including diagnostic testing, treatment, and rehabilitation.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h3 class="service-title">Neurology</h3>
+                                <p class="service-description">Expert care for disorders of the nervous system, including stroke and epilepsy.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-bone"></i>
+                                </div>
+                                <h3 class="service-title">Orthopedics</h3>
+                                <p class="service-description">Comprehensive bone and joint care, including sports medicine and joint replacement.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-lungs"></i>
+                                </div>
+                                <h3 class="service-title">Pulmonology</h3>
+                                <p class="service-description">Specialized care for respiratory conditions like asthma, COPD, and sleep apnea.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-content" id="diagnostic">
+                <div class="service-slider">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-microscope"></i>
+                                </div>
+                                <h3 class="service-title">Laboratory Services</h3>
+                                <p class="service-description">Comprehensive lab testing with fast, accurate results for diagnosis and monitoring.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-x-ray"></i>
+                                </div>
+                                <h3 class="service-title">Imaging Services</h3>
+                                <p class="service-description">State-of-the-art imaging including X-ray, MRI, CT scans, and ultrasound.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-dna"></i>
+                                </div>
+                                <h3 class="service-title">Genetic Testing</h3>
+                                <p class="service-description">Advanced genetic screening for inherited conditions and personalized medicine.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-procedures"></i>
+                                </div>
+                                <h3 class="service-title">Endoscopy</h3>
+                                <p class="service-description">Minimally invasive diagnostic procedures for gastrointestinal conditions.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-content" id="wellness">
+                <div class="service-slider">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-spa"></i>
+                                </div>
+                                <h3 class="service-title">Nutrition Counseling</h3>
+                                <p class="service-description">Personalized dietary plans to optimize health and manage medical conditions.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-running"></i>
+                                </div>
+                                <h3 class="service-title">Exercise Physiology</h3>
+                                <p class="service-description">Customized exercise programs for fitness, rehabilitation, and chronic disease management.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <h3 class="service-title">Cardiac Rehabilitation</h3>
+                                <p class="service-description">Supervised programs to improve cardiovascular health after cardiac events.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="service-icon">
+                                    <i class="fas fa-smile"></i>
+                                </div>
+                                <h3 class="service-title">Mental Wellness</h3>
+                                <p class="service-description">Counseling and therapy services for stress, anxiety, depression, and more.</p>
+                                <a href="Service.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item animate">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">Patient Satisfaction Rate</div>
+                </div>
+                <div class="stat-item animate delay-1">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Medical Specialties</div>
+                </div>
+                <div class="stat-item animate delay-2">
+                    <div class="stat-number">30min</div>
+                    <div class="stat-label">Average Wait Time</div>
+                </div>
+                <div class="stat-item animate delay-3">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Successful Surgeries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctors Section -->
+    <section class="section doctors" id="doctors">
+        <div class="container">
+            <h2 class="section-title animate">Meet Our Specialists</h2>
+            <p class="section-subtitle animate delay-1">Our team of board-certified physicians are leaders in their fields</p>
+            
+            <div class="doctor-grid">
+                <div class="doctor-card animate">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Dr. Sarah Johnson" class="doctor-image">
+                    <div class="doctor-info">
+                        <h3 class="doctor-name">Dr. Sarah Johnson</h3>
+                        <span class="doctor-specialty">Cardiologist</span>
+                        <p class="doctor-bio">Specializing in interventional cardiology with over 15 years of experience in treating complex heart conditions.</p>
+                        <div class="doctor-meta">
+                            <a href="Appo.html" class="btn btn-primary">Book Appointment</a>
+                            <span class="doctor-experience">
+                                <i class="fas fa-award"></i> 15+ years
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="doctor-card animate delay-1">
+                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Dr. Michael Chen" class="doctor-image">
+                    <div class="doctor-info">
+                        <h3 class="doctor-name">Dr. Michael Chen</h3>
+                        <span class="doctor-specialty">Neurologist</span>
+                        <p class="doctor-bio">Expert in treating neurological disorders with a focus on minimally invasive techniques and innovative therapies.</p>
+                        <div class="doctor-meta">
+                            <a href="Appo.html" class="btn btn-primary">Book Appointment</a>
+                            <span class="doctor-experience">
+                                <i class="fas fa-award"></i> 12+ years
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="doctor-card animate delay-2">
+                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Dr. Emily Rodriguez" class="doctor-image">
+                    <div class="doctor-info">
+                        <h3 class="doctor-name">Dr. Emily Rodriguez</h3>
+                        <span class="doctor-specialty">Pediatrician</span>
+                        <p class="doctor-bio">Passionate about children's health with special training in pediatric infectious diseases and immunology.</p>
+                        <div class="doctor-meta">
+                            <a href="Appo.html" class="btn btn-primary">Book Appointment</a>
+                            <span class="doctor-experience">
+                                <i class="fas fa-award"></i> 10+ years
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="doctor-card animate delay-3">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Dr. James Wilson" class="doctor-image">
+                    <div class="doctor-info">
+                        <h3 class="doctor-name">Dr. James Wilson</h3>
+                        <span class="doctor-specialty">Orthopedic Surgeon</span>
+                        <p class="doctor-bio">Specializing in sports medicine and joint replacement with a focus on rapid recovery techniques.</p>
+                        <div class="doctor-meta">
+                            <a href="Appo.html" class="btn btn-primary">Book Appointment</a>
+                            <span class="doctor-experience">
+                                <i class="fas fa-award"></i> 18+ years
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center animate delay-4" style="margin-top: var(--space-xl);">
+                <a href="Service.html" class="btn btn-secondary">
+                    <i class="fas fa-user-md"></i> View All Specialists
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title animate">Patient Experiences</h2>
+            <p class="section-subtitle animate delay-1">Hear what our patients say about their MeCare journey</p>
+            
+            <div class="testimonial-slider">
+                <div class="swiper testimonial-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-content">After struggling with chronic back pain for years, the team at MeCare developed a comprehensive treatment plan that finally gave me relief. The personalized attention and cutting-edge therapies made all the difference.</p>
+                                <div class="testimonial-author">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Robert Taylor" class="testimonial-avatar">
+                                    <div class="testimonial-info">
+                                        <h4>Robert Taylor</h4>
+                                        <p>Orthopedic Patient</p>
+                                        <div class="testimonial-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-content">The cardiology team saved my life after my heart attack. Their quick response and advanced treatment options gave me a second chance. The follow-up care and rehabilitation program have been exceptional.</p>
+                                <div class="testimonial-author">
+                                    <img src="https://randomuser.me/api/portraits/women/58.jpg" alt="Maria Garcia" class="testimonial-avatar">
+                                    <div class="testimonial-info">
+                                        <h4>Maria Garcia</h4>
+                                        <p>Cardiology Patient</p>
+                                        <div class="testimonial-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-content">As a busy mom, I love the convenience of the MeCare patient portal. Being able to message my doctor, schedule appointments, and access test results online saves me so much time. The pediatric care for my kids is outstanding too!</p>
+                                <div class="testimonial-author">
+                                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Jennifer Lee" class="testimonial-avatar">
+                                    <div class="testimonial-info">
+                                        <h4>Jennifer Lee</h4>
+                                        <p>Family Medicine Patient</p>
+                                        <div class="testimonial-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment CTA -->
+    <section class="appointment-cta">
+        <div class="container">
+            <h2 class="animate">Ready to Take Control of Your Health?</h2>
+            <p class="animate delay-1">Schedule an appointment with one of our specialists today and experience the MeCare difference.</p>
+            <div class="text-center animate delay-2">
+                <a href="Appo.html" class="btn btn-accent">
+                    <i class="fas fa-calendar-check"></i> Book Appointment Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title animate">Contact Us</h2>
+            <p class="section-subtitle animate delay-1">We're here to answer your questions and provide the care you need</p>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card animate">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Our Location</h3>
+                            <p>123 Medical Center Drive<br>Healthville, HV 12345</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card animate delay-1">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone Numbers</h3>
+                            <p>
+                                <a href="tel:+18005551234">(800) 555-1234</a><br>
+                                <a href="tel:+18005554321">(800) 555-4321</a> (Emergency)
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card animate delay-2">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email Us</h3>
+                            <p>
+                                <a href="mailto:info@mecare.com">info@mecare.com</a><br>
+                                <a href="mailto:support@mecare.com">support@mecare.com</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card animate delay-3">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Hours of Operation</h3>
+                            <p>
+                                Monday-Friday: 8am-8pm<br>
+                                Saturday: 9am-5pm<br>
+                                Sunday: Emergency only
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form animate delay-4">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">
+                        <i class="fas fa-heartbeat"></i> MeCare
+                    </a>
+                    <p>Providing compassionate, innovative healthcare solutions since 2010. Our mission is to make quality healthcare accessible to everyone.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#features" class="footer-link"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#services" class="footer-link"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="#doctors" class="footer-link"><i class="fas fa-chevron-right"></i> Doctors</a></li>
+                        <li><a href="Appo.html" class="footer-link"><i class="fas fa-chevron-right"></i> Appointments</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Emergency Care</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Primary Care</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Specialty Care</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Diagnostic Tests</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Wellness Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3 class="footer-heading">Newsletter</h3>
+                    <p>Subscribe to our newsletter for health tips, news, and special offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 MeCare Healthcare. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">HIPAA Compliance</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Service Tabs
+            const serviceTabs = document.querySelectorAll('.service-tab');
+            const serviceContents = document.querySelectorAll('.service-content');
+            
+            serviceTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    serviceTabs.forEach(t => t.classList.remove('active'));
+                    serviceContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                    
+                    // Reinitialize Swiper for the active content
+                    if (typeof activeSwiper !== 'undefined') {
+                        activeSwiper.destroy();
+                    }
+                    initSwiper();
+                });
+            });
+            
+            // Initialize Swiper sliders
+            let activeSwiper;
+            let testimonialSwiper;
+            
+            function initSwiper() {
+                // Services slider
+                activeSwiper = new Swiper('.service-content.active .swiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    pagination: {
+                        el: '.service-content.active .swiper-pagination',
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 2,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                        },
+                    }
+                });
+                
+                // Testimonials slider
+                testimonialSwiper = new Swiper('.testimonial-slider', {
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    loop: true,
+                    pagination: {
+                        el: '.testimonial-slider .swiper-pagination',
+                        clickable: true,
+                    },
+                });
+            }
+            
+            initSwiper();
+            
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                    }
+                });
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Here you would typically send the form data to your server
+                    // For demonstration, we'll just show an alert
+                    alert('Thank you for your message! We will contact you soon.');
+                    this.reset();
+                });
+            }
+            
+            // Animation on scroll
+            const animateElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(element);
+            });
+            
+            // Set active nav link based on scroll position
+            const sections = document.querySelectorAll('section');
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
